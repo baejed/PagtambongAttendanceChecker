@@ -1,0 +1,207 @@
+.schedule-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.header-title {
+  text-align: center;
+}
+
+.schedule-card {
+  display: flex;
+  background-color: #363636;
+  padding: 1rem;
+  border-radius: 10px;
+  justify-content: space-between;
+  width: 30%;
+  /* min-width: 30rem; */
+
+  h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Roboto Mono';
+    font-weight: 700;
+  }
+
+  p {
+    color: #DDDDDD;
+    font-size: 1rem;
+  }
+
+}
+
+.check-icon {
+  width: 2.5rem;
+  margin-left: 0.5rem;
+}
+
+.body-icon {
+  width: 1.25rem;
+}
+
+.schedule-card-header {
+  display: flex;
+  height: 3rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.schedule-card-details {
+  padding-left: 0.5rem;
+}
+
+.schedule-card-details-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.schedule-card-details-body-item {
+  display: flex;
+  align-items: center;
+
+  p {
+    margin-left: 0.25rem;
+    font-family: 'Roboto Mono';
+  }
+
+}
+
+.schedule-date-box {
+  background-color: #0299E3;
+  border-radius: 10px;              
+  width: 8.5rem;
+  height: 8.5rem;
+  justify-content: space-evenly;
+  margin-left: 1rem;
+}
+
+
+.month-box {
+  display: flex;
+  background-color: #000000;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 2.5rem;
+  justify-content: center;
+  align-items: center ;
+
+  p {
+    align-items: center;
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+
+}
+
+.day-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5.5rem;
+
+  h1 {
+    color: #000000;
+    font-size: 5rem;
+    margin: 0;
+    align-items: center;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 4rem;
+  }
+
+}
+
+@media only screen and (max-width: 880px) and (min-width: 601px) {
+
+  .schedule-card-container {
+    justify-content: space-evenly;
+  }
+
+  .schedule-card {
+    width: 90%;
+    min-width: 90%;
+    
+    .event-name {
+      font-size: 1rem;
+    }
+
+  }
+
+}
+
+@media only screen and (max-width: 600px) {
+
+  .schedule-card-container {
+    justify-content: space-evenly;
+  }
+
+  .schedule-card {
+    width: 90%;
+    min-width: 90%;
+    
+    .event-name {
+      font-size: 1rem;
+    }
+
+  }
+
+  .schedule-card-details-body-item {
+
+    p {
+      margin-left: 0.25rem;
+      font-family: 'Roboto Mono';
+      font-size: 0.75rem;
+    }
+  
+  }
+
+  .schedule-date-box {     
+    width: 8rem;
+    height: 8rem;
+  }
+
+}
+
+@media only screen and (max-width: 1590px) and (min-width: 881px) {
+
+  .schedule-card {
+    
+    .event-name {
+      font-size: 1.25rem;
+    }
+
+  }
+
+}
+
+@media only screen and (max-width: 1360px) and (min-width: 601px) {
+
+  .schedule-card {
+    
+    width: 45%;
+
+    .event-name {
+      font-size: 1.5rem;
+    }
+
+  }
+  
+}
+
+@media only screen and (max-width: 1090px) and (min-width: 601px) {
+
+  .schedule-card {
+    
+    width: 45%;
+
+    .event-name {
+      font-size: 1.25rem;
+    }
+
+  }
+  
+}

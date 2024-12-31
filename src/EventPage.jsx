@@ -137,11 +137,8 @@ function EventPage() {
 
   return (
     <div>
-      <button onClick={logout}>
-        <img src = {backIcon} alt="Location" className="body-icon"/>
-      </button>
       <div>
-        <h1 className="header-title">{"Events of ".concat(studentDoc ? studentDoc.data()['first_name'] : "none")}</h1>
+        <h1 className="event-page-title">{"Events of ".concat(studentDoc ? studentDoc.data()['first_name'] : "none")}</h1>
         <div className="schedule-card-container">
           {eventComponents}
         </div>

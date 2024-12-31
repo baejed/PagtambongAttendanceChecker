@@ -27,9 +27,14 @@ function LoginPage() {
   }, [studentDoc]);
 
   return (
-      <div>
-        <input type="text" placeholder="ID number" onChange={handleIdInput}/>
-        <button onClick={handleLogin}>Login</button>
+      <div className="login-container">
+        <div className="login-card">
+          <h2 className="tb-label">Student ID</h2>
+          <div className="tb-container">
+            <input type="text" placeholder="Ex. 137102" onChange={handleIdInput} className="id-number-in"/>
+          </div>
+          <button onClick={handleLogin} className="login-button"><p className="button-lbl">Check my attendance</p></button>
+        </div>
       </div>
   );
 }

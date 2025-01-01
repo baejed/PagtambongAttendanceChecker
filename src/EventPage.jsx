@@ -106,12 +106,13 @@ function EventPage() {
         <div className="schedule-card-details">
           <div className="schedule-card-header">
             <h2 className="event-name">{event_name}</h2>
-            {checkMark}
+            {/* {checkMark} */}
           </div>
           <div className="schedule-card-details-body">
             <div className="schedule-card-details-body-item">
               <img src = {timeIcon} alt="Time" className="body-icon"/>
               <p className="schedule-detail-text">{time}</p>
+              {checkMark}
             </div>
             <div className="schedule-card-details-body-item">
               <img src = {locationIcon} alt="Location" className="body-icon"/>

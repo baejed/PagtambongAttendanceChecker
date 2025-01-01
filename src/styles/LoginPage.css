@@ -38,7 +38,7 @@
   width: 100%;
 }
 
-.id-number-in {
+/* .id-number-in {
 
   font-size: 14px;
   border-radius: 6px;
@@ -51,7 +51,7 @@
   display: block;
   height: 36px;
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 
 }
 
@@ -62,16 +62,50 @@
 
 .id-number-in::hover {
   border-color: #ccc;
+} */
+
+/* From Uiverse.io by Jaareet */ 
+.id-number-in {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  font-weight: 300;
+  font-size: 1.3rem;
+  color: #fff;
+  background-color: rgb(28,28,30);
+  box-shadow: 0 0 .4vw rgba(0,0,0,0.5), 0 0 0 .15vw transparent;
+  border-radius: 0.4vw;
+  border: none;
+  outline: none;
+  padding: 0rem;
+  padding-left: 1rem;
+  width: 100%;
+  transition: .4s;
+  height: 3rem;
 }
 
+.id-number-in:hover {
+  box-shadow: 0 0 0 .15vw rgba(135, 207, 235, 0.186);
+}
+
+.id-number-in:focus {
+  box-shadow: 0 0 0 .15vw #0299E3;
+}
+
+.not-found-prompt {
+  color: red;
+  font-size: 0.75rem;
+  text-align: end;
+  padding-top: 0.25rem;
+}
 
 .login-button {
 
-  display: inline-block;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   outline: 0;
   cursor: pointer;
   border: none;
-  padding: 0 56px;
+  /* padding-left: ; */
   height: 3rem;
   line-height: 45px;
   border-radius: 7px;
@@ -82,7 +116,7 @@
   box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
   transition: background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
   width: 100%;
-  text-align: center;
+  margin-top: 1rem;
 }
 
 .login-button:hover {
@@ -90,8 +124,31 @@
   box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
 }
 
+.login-button:focus {
+  /* box-shadow: 0 0 0 .15vw #0299E3; */
+  outline: none;
+  border: none;
+  box-shadow: 0 0 0 .025rem #0299E3;
+}
+
 .button-lbl {
   margin: 0;
   font-weight: 500;
   font-size: 1.25rem;
 }
+
+.loading-icon {
+  width: 2rem;
+}
+
+/* @media only screen and (max-width: 405px) {
+  .button-lbl {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 370px) {
+  .button-lbl {
+    font-size: 0.8rem;
+  }
+} */

@@ -10,6 +10,7 @@ import timeIcon from './assets/time-line.svg';
 import groupIcon from './assets/group-line.svg';
 import backIcon from './assets/arrow-left-line.svg';
 import DateTransformer from './helper_functions/dateTransformer.js';
+import MainDatabase from "./database/database.js";
 
 function EventPage() {
 
@@ -19,6 +20,7 @@ function EventPage() {
   const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const [eventComponents, setEventComponents] = useState(<></>);
+  const [eventAttendanceMap, setEventAttendanceMap] = useState([]);
 
   useEffect(() => {
     if(studentDoc == null) {
@@ -34,7 +36,7 @@ function EventPage() {
 
     const newEventComponents = events.map((event) => {
       return (
-        <ScheduleCard key={event.id} eventDoc={event}/>
+        <ScheduleCard key={event.id} eventDoc={event} isPresent={eventAttendanceMap[event.data()['event_name']]}/>
       );
     });
 
@@ -65,15 +67,27 @@ function EventPage() {
   async function fetchStudentEvents() {
     const newstudentEvents = await EventService.getStudentEvents(studentDoc.ref);
     setStudentEventDocs(newstudentEvents);
+    console.log("----------------");
     console.log(newstudentEvents);
+    console.log("----------------");
   }
 
   async function fetchEvents(){
+    const newEventAttendance = [];
     const newEvents = await Promise.all(studentEventDocs.map(async (doc) => {
       const eventDoc = await getDoc(doc.data()['event']);
+
+      const isPresent = doc.data()['is_present'];
+
+      newEventAttendance[eventDoc.data()['event_name']] = doc.data()['is_present'];
+      console.log(`${eventDoc.data()['event_name']}: ${newEventAttendance[eventDoc.data()['event_name']]}`);
+      // console.log(doc.data()['is_present'])
+      
+      // Work here to get the attendance of the student
       return eventDoc;
     }));
     setEvents(newEvents);
+    setEventAttendanceMap(newEventAttendance);
   }
 
   function logout(){
@@ -82,24 +96,24 @@ function EventPage() {
   }
 
 
-  function ScheduleCard({id, eventDoc}) {
+  function ScheduleCard({id, eventDoc, isPresent}) {
 
-    var attended = true;
+    // var attended = ;
 
     const date = eventDoc.data()['date'].toDate();
     const event_name = eventDoc.data()['event_name'];
     const venue = eventDoc.data()['venue'];
     const organizer = eventDoc.data()['organizer'];
 
+    // console.log(`${event_name}: ${isPresent}`);
+
     const day = date.getDate();
     const month = DateTransformer.transformMonth(date.getMonth());
     const time = DateTransformer.transformTime(date);
 
+    // console.log(event_name.concat(": ").concat(DateTransformer.transformTime(date)));
 
-
-    console.log(event_name.concat(": ").concat(DateTransformer.transformTime(date)))
-
-    const checkMark = attended ? <img src = {checkIcon} alt="Attended" className="check-icon"/> : <></>;
+    const checkMark = isPresent ? <img src = {checkIcon} alt="Attended" className="check-icon"/> : <></>;
 
     return (
       <div className="schedule-card">

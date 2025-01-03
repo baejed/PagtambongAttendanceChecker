@@ -7,6 +7,7 @@ import './App.css'
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom'
 import EventPage from './EventPage'
 import LoginPage from './LoginPage'
+import MainDatabase from './database/database'
 
 export const StudentContext = React.createContext();
 

@@ -49,8 +49,6 @@ function EventPage() {
     });
 
     setEventComponents(newEventComponents);
-    setEventComponentsIsSet(true);
-
   }, [events]);
 
   useEffect(() => {
@@ -95,6 +93,8 @@ function EventPage() {
       // Work here to get the attendance of the student
       return eventDoc;
     }));
+
+    setEventComponentsIsSet(true);
     setEvents(newEvents);
     setEventAttendanceMap(newEventAttendance);
   }
@@ -172,7 +172,7 @@ function EventPage() {
       <div>
         <h1 className="event-page-title">{loggedStudentText}</h1>
         <div className="schedule-card-container" style={scheduleCardContainerStyle}>
-          {eventComponentsIsSet === true ? eventComponents : loadingComp}
+          {eventComponentsIsSet === true ? eventComponents : <LoadingCircle />}
         </div>
       </div>
     </div>

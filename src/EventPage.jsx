@@ -11,6 +11,7 @@ import groupIcon from './assets/group-line.svg';
 import backIcon from './assets/arrow-left-line.svg';
 import DateTransformer from './helper_functions/dateTransformer.js';
 import MainDatabase from "./database/database.js";
+import loadingIcon from './assets/loading-icon.svg';
 
 function EventPage() {
 
@@ -21,6 +22,13 @@ function EventPage() {
   const [events, setEvents] = useState([]);
   const [eventComponents, setEventComponents] = useState(<></>);
   const [eventAttendanceMap, setEventAttendanceMap] = useState([]);
+  const [eventComponentsIsSet, setEventComponentsIsSet] = useState(false);
+
+  // centers the loading icon
+  const scheduleCardContainerStyle = eventComponentsIsSet === false ? {justifyContent: 'center'} : null
+  const loadingComp = <LoadingCircle />;
+
+  const loggedStudentText = studentDoc ? "Events of ".concat(studentDoc.data()['first_name']) : "Loading student";
 
   useEffect(() => {
     if(studentDoc == null) {
@@ -41,6 +49,7 @@ function EventPage() {
     });
 
     setEventComponents(newEventComponents);
+    setEventComponentsIsSet(true);
 
   }, [events]);
 
@@ -93,6 +102,14 @@ function EventPage() {
   function logout(){
     setStudentDoc(null);
     navigate('/');
+  }
+
+  function LoadingCircle({id}){
+    return (
+      <div className="event-loading-icon-container">
+        <img src={loadingIcon} alt="loading events" className="event-loading-icon"/>
+      </div>
+    )
   }
 
 
@@ -153,9 +170,9 @@ function EventPage() {
   return (
     <div>
       <div>
-        <h1 className="event-page-title">{"Events of ".concat(studentDoc ? studentDoc.data()['first_name'] : "none")}</h1>
-        <div className="schedule-card-container">
-          {eventComponents}
+        <h1 className="event-page-title">{loggedStudentText}</h1>
+        <div className="schedule-card-container" style={scheduleCardContainerStyle}>
+          {eventComponentsIsSet === true ? eventComponents : loadingComp}
         </div>
       </div>
     </div>

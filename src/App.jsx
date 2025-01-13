@@ -38,7 +38,7 @@ function Header({backButtonRoute, clearStudent}){
 
       <div style={{display: 'flex'}}>
         {/* <img src={codesLogo} alt="codes logo" className='codes-logo'/> */}
-        <h1 className='header-title'>PAGTAMBONG CHECKER</h1>
+        <h1 className='header-title'>CheckGa! CHECKER</h1>
       </div>
 
 

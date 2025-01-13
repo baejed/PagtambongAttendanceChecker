@@ -3,12 +3,12 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { getFirestore, collection, getDocs, getDoc, doc, onSnapshot } from 'firebase/firestore'
 import StudentService from './database/studentService'
 import { StudentContext } from "./App";
-import loginIcon from './assets/loading-icon.svg';
+import loadingIcon from './assets/loading-icon.svg';
 
 function LoginPage() {
     
   const btnLblComp = <p className="button-lbl">Check my attendance</p>;
-  const loadingComp = <img src={loginIcon} alt="checking" className="loading-icon"/>;
+  const loadingComp = <img src={loadingIcon} alt="checking" className="loading-icon"/>;
 
 
   const [idInput, setIdInput] = useState("");

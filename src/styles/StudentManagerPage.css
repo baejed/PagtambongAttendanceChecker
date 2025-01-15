@@ -1,0 +1,63 @@
+.student-input-fields {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  font-weight: 300;
+  font-size: 1.3rem;
+  color: #fff;
+  background-color: rgb(28,28,30);
+  box-shadow: 0 0 .4vw rgba(0,0,0,0.5), 0 0 0 .15vw transparent;
+  border-radius: 0.4vw;
+  border: none;
+  outline: none;
+  padding: 0rem;
+  padding-left: 1rem;
+  width: 100%;
+  transition: .4s;
+  height: 3rem;
+}
+
+.student-input-fields:hover {
+  box-shadow: 0 0 0 .15vw rgba(135, 207, 235, 0.186);
+}
+
+.student-input-fields:focus {
+  box-shadow: 0 0 0 .15vw #0299E3;
+}
+
+.student-combo-box {
+  height: 3rem;
+  font-size: 1.3rem;
+}
+
+.participant-mngr-btn {
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  outline: 0;
+  cursor: pointer;
+  border: none;
+  /* padding-left: ; */
+  height: 3rem;
+  line-height: 45px;
+  border-radius: 7px;
+  background-color: #0070f3;
+  color: white;
+  font-weight: 400;
+  font-size: 16px;
+  box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
+  transition: background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
+  width: 20rem;
+  margin-top: 1rem;
+}
+
+.participant-mngr-btn:hover {
+  background: rgba(0, 103, 221, 0.9);
+  box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
+}
+
+.participant-mngr-btn:focus {
+  /* box-shadow: 0 0 0 .15vw #0299E3; */
+  outline: none;
+  border: none;
+  box-shadow: 0 0 0 .025rem #0299E3;
+}

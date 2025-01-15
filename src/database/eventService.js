@@ -1,5 +1,5 @@
 import MainDatabase from "./database";
-import { getFirestore, collection, getDocs, getDoc, doc, onSnapshot, query, where, DocumentReference } from 'firebase/firestore'
+import { getFirestore, collection, getDocs, getDoc, doc, onSnapshot, query, where, DocumentReference, orderBy } from 'firebase/firestore'
 
 class EventService {
 
@@ -22,7 +22,19 @@ class EventService {
 
   }
 
-  
+  static async getEvents() {
+    const eventNames = [];
+    const q = query(EventService.eventColletion, orderBy("event_name", "asc"));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      eventNames.push(doc.data()['event_name']);
+    });
+
+    // console.log(eventNames);
+
+    return eventNames;
+
+  }
 
 }
 

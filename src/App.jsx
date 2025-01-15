@@ -7,6 +7,7 @@ import './App.css'
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom'
 import EventPage from './EventPage'
 import LoginPage from './LoginPage'
+import StudentManagerPage from './StudentManagerPage'
 import MainDatabase from './database/database'
 
 export const StudentContext = React.createContext();
@@ -19,6 +20,10 @@ function Header({backButtonRoute, clearStudent}){
   function logoutFunc() {
     clearStudent();
     navigate('/');
+  }
+
+  function goToParticipantManager() {
+    navigate('/studentMngr');
   }
 
   const backButton = hasBackButton ? <img src={backIcon} alt='back' onClick={logoutFunc} className='back-button'></img> : <></>
@@ -43,7 +48,7 @@ function Header({backButtonRoute, clearStudent}){
 
 
       <div>
-        <img src={codesLogo} alt="info" className='codes-logo'/>
+        <img src={codesLogo} alt="info" className='codes-logo' onClick={goToParticipantManager}/>
       </div>
     </div>
   )
@@ -64,11 +69,13 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Header/>}/>
           <Route exact path='/event/:id' element={<Header backButtonRoute={'/'} clearStudent={clearStudent}/>}/>
+          <Route exact path='/studentMngr' element={<Header/>}/>
         </Routes>
         <div className='content-div'>
           <Routes>
             <Route exact path='/' element={<LoginPage/>}/>
             <Route exact path='/event/:id' element={<EventPage/>}/>
+            <Route exact path='/studentMngr' element={<StudentManagerPage/>}/>
           </Routes>
         </div>
       </Router>

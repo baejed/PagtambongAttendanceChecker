@@ -14,6 +14,7 @@ function StudentManagerPage() {
     yearLevel: '1st Year', // Default value
   });
   const [eventOptions, setEventOptions] = useState(<></>);
+  const [selectedEvent, setSelectedEvent] = useState("");
 
   useEffect(() => {
     fetchEvents();
@@ -24,6 +25,9 @@ function StudentManagerPage() {
     const newEventNames = await EventService.getEvents();
 
     const newEventOptions = newEventNames.map((value, key) => {
+      if(key === 0) {
+        setSelectedEvent(value)
+      }
       return (
         <option key={key} value={value}>{value}</option>
       )
@@ -71,6 +75,21 @@ function StudentManagerPage() {
     });
     // console.log(`${name}: ${value}`);
   };
+
+  const handleEventInputChange = (e) => {
+    const eventName = e.target.value;
+    setSelectedEvent(eventName);
+  };
+
+  async function handleGetReport() {
+
+    
+
+    // console.log(selectedEvent);
+
+    EventService.getEventParticipants(selectedEvent);
+
+  }
 
   const handleSubmit = () => {
     if(formData['firstName'] === '' || formData['lastName'] === '' || formData['idNumber'] === ''){
@@ -165,12 +184,12 @@ function StudentManagerPage() {
       <select
         className="student-combo-box"
         name="program"
-        value={formData.program}
-        onChange={handleInputChange}
+        value={selectedEvent}
+        onChange={handleEventInputChange}
       >
         {eventOptions}
       </select>
-      <button className='participant-mngr-btn'>Attendance Report</button>
+      <button className='participant-mngr-btn' onClick={handleGetReport}>Attendance Report</button>
     </>
   );
 }

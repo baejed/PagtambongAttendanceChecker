@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import StudentService from "./database/studentService";
 import EventService from "./database/eventService";
 import * as d3 from "d3"
+import {Parser} from "@json2csv/plainjs"
 
 function StudentManagerPage() {
 
@@ -35,6 +36,33 @@ function StudentManagerPage() {
 
     setEventOptions(newEventOptions);
 
+  }
+
+  function downloadCsv(csv) {
+    // Create a Blob from the CSV data
+    const blob = new Blob([csv], { type: 'text/csv' });
+
+    // Create an anchor element
+    const link = document.createElement('a');
+
+    // Create a URL for the Blob
+    const url = URL.createObjectURL(blob);
+
+    // Set the download attribute with the filename
+    link.setAttribute('href', url);
+    link.setAttribute('download', `${selectedEvent} attendance report.csv`);
+
+    // Append the link to the document body (not visible)
+    document.body.appendChild(link);
+
+    // Programmatically trigger a click event on the link
+    link.click();
+
+    // Clean up the DOM by removing the link
+    document.body.removeChild(link);
+
+    // Revoke the URL to release resources
+    URL.revokeObjectURL(url);
   }
 
   async function addStudents() {
@@ -83,11 +111,8 @@ function StudentManagerPage() {
 
   async function handleGetReport() {
 
-    
-
-    // console.log(selectedEvent);
-
-    EventService.getEventParticipants(selectedEvent);
+    const csv = await EventService.getEventParticipantsCsv(selectedEvent);
+    downloadCsv(csv);
 
   }
 
@@ -97,7 +122,7 @@ function StudentManagerPage() {
       return;
     }
     
-    StudentService.addStudent(formData['firstName'], formData['lastName'], formData['program'], formData['idNumber'], formData['yearLevel'], false)
+    StudentService.addStudent(formData['firstName'], formData['lastName'], formData['program'], formData['idNumber'], formData['yearLevel'], true)
 
   };
 
@@ -189,7 +214,7 @@ function StudentManagerPage() {
       >
         {eventOptions}
       </select>
-      <button className='participant-mngr-btn' onClick={handleGetReport}>Attendance Report</button>
+      <button className='participant-mngr-btn' onClick={handleGetReport}>Download Attendance Report</button>
     </>
   );
 }

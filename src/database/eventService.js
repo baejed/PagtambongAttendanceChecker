@@ -1,6 +1,6 @@
 import MainDatabase from "./database";
 import { getFirestore, collection, getDocs, getDoc, doc, onSnapshot, query, where, DocumentReference, orderBy } from 'firebase/firestore'
-// import * as json2csv from "json2csv"
+import {Parser} from "@json2csv/plainjs"
 
 class EventService {
 
@@ -36,7 +36,7 @@ class EventService {
 
   }
 
-  static async getEventParticipants(eventName) {
+  static async getEventParticipantsCsv(eventName) {
 
     const eventDocRef = await this.getEventDocRef(eventName);
 
@@ -51,17 +51,52 @@ class EventService {
     const q = query(EventService.attendanceItemCollection, where("event", "==", eventDocRef));
     const querySnapshot = await getDocs(q);
 
-    const studentDoc = await Promise.all(
+    const studentDocs = await Promise.all(
       querySnapshot.docs.map( async (doc) => {
         const studentDoc = await getDoc(doc.data()['student']);
-        studentAttendance[studentDoc['student_id']] = doc.data()['is_present'];
-
-        console.log(studentDoc);
-        return studentDoc;
+        studentAttendance[studentDoc.data()['student_id']] = doc.data()['is_present'];
+        return studentDoc.data();
       })
     );
 
+    const sortedStudentDocs = studentDocs.sort((a, b) => a.last_name.localeCompare(b.last_name));
 
+    let numAbsents = 0;
+    let numPresents = 0;
+    let numAttendees = 0;
+
+    // console.log('---------------------------------');
+    // you can set the fields of the report here
+    const fields = [
+      {label: 'Last Name', value: 'last_name'},
+      {label: 'First Name', value: 'first_name'},
+      {label: 'Year Level', value: 'year_level'},
+      {label: 'Program', value: 'program'},
+      {label: 'Attendance', value: (row) => {
+
+        numAttendees++;
+
+        if (studentAttendance[row.student_id] === true) {
+          numPresents++;
+          return "Present";
+        } else {
+          numAbsents++;
+          return "Absent";
+        }
+      }}
+    ];
+
+    try {
+      const opts = {fields};
+      const parser = new Parser(opts);
+      let csv = parser.parse(studentDocs);
+      csv = csv.concat(`\n"Total Present:",${numPresents}\n"Total Absent:",${numAbsents}\n"Expected Attendees:",${numAttendees}\n`);
+      return csv;
+    } catch (err) {
+      console.log(err);
+      alert('Failed to download report')
+      return;
+    }
 
   }
 

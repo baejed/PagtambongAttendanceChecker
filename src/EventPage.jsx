@@ -37,8 +37,6 @@ function EventPage() {
   const loggedStudentText = studentDoc
     ? capitalize(studentDoc.data()['last_name']) + ", " + capitalize(studentDoc.data()['first_name'])
     : "Loading student";
-  
-
 
   useEffect(() => {
     if(studentDoc == null) {

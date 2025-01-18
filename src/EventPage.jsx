@@ -26,9 +26,19 @@ function EventPage() {
 
   // centers the loading icon
   const scheduleCardContainerStyle = eventComponentsIsSet === false ? {justifyContent: 'center'} : null
-  const loadingComp = <LoadingCircle />;
 
-  const loggedStudentText = studentDoc ? "Events of ".concat(studentDoc.data()['first_name']) : "Loading student";
+  const capitalize = (name) => {
+    return name
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+  };
+  
+  const loggedStudentText = studentDoc
+    ? capitalize(studentDoc.data()['last_name']) + ", " + capitalize(studentDoc.data()['first_name'])
+    : "Loading student";
+  
+
 
   useEffect(() => {
     if(studentDoc == null) {
@@ -59,7 +69,13 @@ function EventPage() {
   }, [studentDoc]);
 
   useEffect(() => {
-    if(studentEventDocs.length === 0) return;
+    if(studentEventDocs.length === 0) {
+      setEventComponentsIsSet(true)
+      setEventComponents(<>
+        <h2>No events found</h2>
+      </>)
+      return
+    };
 
     console.log(studentEventDocs);
 

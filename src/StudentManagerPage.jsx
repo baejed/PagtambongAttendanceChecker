@@ -67,15 +67,18 @@ function StudentManagerPage() {
 
   async function addStudents() {
 
-    console.log("pressed");
+    // console.log("pressed");
 
     if(csvData.length == 0) {
       alert("csv file is empty");
       return;
     }
 
+    console.log('---------------BATCH ADD START---------------')
+
     let numFails = 0;
       
+    // this should be the names of the fields in the csv
     for(let i = 0; i < csvData.length; i++){
       const firstName = csvData[i]['firstName'];
       const lastName = csvData[i]['lastName'];
@@ -91,7 +94,10 @@ function StudentManagerPage() {
       
     }
 
+    console.log('----------------BATCH ADD END----------------')
+
     alert(`${numFails} error/s out of ${csvData.length}`);
+
 
   }
 

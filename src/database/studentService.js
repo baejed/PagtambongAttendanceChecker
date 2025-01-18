@@ -7,19 +7,19 @@ class StudentService {
   static studentCollection = collection(StudentService.db, 'student-info');
 
   static async getStudentByStudentId(idNumber) {
-    console.log("PROCESSING: ", idNumber);
+    // console.log("PROCESSING: ", idNumber);
 
     const q = query(this.studentCollection, where("student_id", "==", idNumber));
     const querySnapshot = await getDocs(q);
     let selectedStudentDoc = null;
 
     querySnapshot.forEach((doc) => {
-      console.log(doc.ref);
+      // console.log(doc.ref);
       selectedStudentDoc = doc;
     });
 
     if (selectedStudentDoc) {
-      console.log("DONE ".concat(selectedStudentDoc.data()['student_id']));
+      // console.log("DONE ".concat(selectedStudentDoc.data()['student_id']));
     }
 
     return selectedStudentDoc;
@@ -34,8 +34,10 @@ class StudentService {
   static async addStudent(firstName, lastName, program, studentId, yearLevel, enableAlert) {
 
     if(await this.isStudentInDatabase(studentId)) {
-      (enableAlert === true) ? alert(`${studentId} is already added`) : console.log(`${studentId} is already added`);
-      console.log("closed")
+      if (enableAlert === true) {
+        alert(`${studentId} is already added`)
+      };
+      console.log(`ADD STUDENT: ${studentId} is already registered`)
       return false;
     }
 
@@ -49,7 +51,10 @@ class StudentService {
     };
 
     await addDoc(StudentService.studentCollection, studentData);
-    (enableAlert === true) ? alert(`${studentId} added`) : console.log(`${studentId} added`);
+    if (enableAlert === true) {
+      alert(`${studentId} added`);
+    }
+    console.log(`ADD STUDENT: ${studentId} successfully registered`);
     return true;
 
   }

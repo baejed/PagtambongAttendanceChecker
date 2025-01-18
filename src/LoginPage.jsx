@@ -78,12 +78,21 @@ function LoginPage() {
     startButtonLoading();
 
     setNotFoundComp(null);
-    try{
-      const newStudentDoc = await StudentService.getStudentByStudentId(idInput);
-      setStudentDoc(newStudentDoc);
-    } catch (err){
+
+    const newStudentDoc = await StudentService.getStudentByStudentId(idInput);
+    setStudentDoc(newStudentDoc);
+
+    if (!newStudentDoc){
       setNotFoundComp(<p className="not-found-prompt">Student not found</p>);
     }
+
+
+    // try{
+    //   const newStudentDoc = await StudentService.getStudentByStudentId(idInput);
+    //   setStudentDoc(newStudentDoc);
+    // } catch (err){
+    //   setNotFoundComp(<p className="not-found-prompt">Student not found</p>);
+    // }
 
     stopButtonLoading();
 

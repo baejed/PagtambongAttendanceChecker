@@ -37,8 +37,6 @@ function EventPage() {
   const loggedStudentText = studentDoc
     ? capitalize(studentDoc.data()['last_name']) + ", " + capitalize(studentDoc.data()['first_name'])
     : "Loading student";
-  
-
 
   useEffect(() => {
     if(studentDoc == null) {
@@ -69,13 +67,7 @@ function EventPage() {
   }, [studentDoc]);
 
   useEffect(() => {
-    if(studentEventDocs.length === 0) {
-      setEventComponentsIsSet(true)
-      setEventComponents(<>
-        <h2>No events found</h2>
-      </>)
-      return
-    };
+    if(studentEventDocs.length === 0) return;
 
     console.log(studentEventDocs);
 
@@ -90,6 +82,12 @@ function EventPage() {
   async function fetchStudentEvents() {
     const newstudentEvents = await EventService.getStudentEvents(studentDoc.ref);
     setStudentEventDocs(newstudentEvents);
+    if(newstudentEvents.length === 0){
+      setEventComponentsIsSet(true)
+      setEventComponents(<>
+        <h2>No events found</h2>
+      </>)
+    }
     console.log("----------------");
     console.log(newstudentEvents);
     console.log("----------------");

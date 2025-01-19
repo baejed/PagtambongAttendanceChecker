@@ -168,8 +168,8 @@ function EventPage() {
     );
 
     return (
-      <div className="max-w-md p-6 bg-[#1c1c1e] flex flex-col border basis-full border-[#242426] rounded-lg shadow sm:grid sm:grid-cols-[3fr_1fr] gap-4">
-        <div className="order-2 schedule-card-details">
+      <div className="max-w-md p-6 bg-[#1c1c1e] w-full  border basis-full border-[#242426] rounded-lg shadow grid grid-cols-[3fr_1fr] gap-4">
+        <div className=" schedule-card-details">
           <div className="mb-4 schedule-card-header">
             <h2 className="text-lg font-bold">{event_name}</h2>
           </div>
@@ -189,7 +189,7 @@ function EventPage() {
             </div>
           </div>
         </div>
-        <div className="grid grid-rows-[1fr_3fr] w-full aspect-square order-1">
+        <div className="grid grid-rows-[1fr_3fr] w-full aspect-square">
           <div className="text-center bg-black rounded-t-lg ">
             <p className="schedule-month">{month}</p>
           </div>
@@ -202,7 +202,7 @@ function EventPage() {
   }
 
   return (
-    <div className="container flex flex-col w-full h-full mx-auto overflow-hidden">
+    <div className="container flex flex-col w-full mx-auto overflow-hidden">
       <h1 className="my-8 text-4xl font-bold text-center sm:text-5xl">
         {loggedStudentText}
       </h1>

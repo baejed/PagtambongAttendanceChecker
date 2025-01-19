@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {},
     container: {
-      padding: "1rem",
+      padding: "2rem",
     },
   },
   plugins: [require("@tailwindcss/typography")],

@@ -1,80 +1,82 @@
-import React, { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import codesLogo from './assets/codes_logo.png'
-import backIcon from './assets/arrow-left-s-line-white.svg'
-import './App.css'
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom'
-import EventPage from './EventPage'
-import LoginPage from './LoginPage'
-import MainDatabase from './database/database'
+import React, { useState } from "react";
+import codesLogo from "./assets/codes_logo.png";
+import backIcon from "./assets/arrow-left-s-line-white.svg";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
+import EventPage from "./EventPage";
+import LoginPage from "./LoginPage";
 
 export const StudentContext = React.createContext();
 
-function Header({backButtonRoute, clearStudent}){
-
+// eslint-disable-next-line react/prop-types
+function Header({ backButtonRoute, clearStudent }) {
   const navigate = useNavigate();
   const hasBackButton = backButtonRoute && clearStudent;
-  
+
   function logoutFunc() {
     clearStudent();
-    navigate('/');
+    navigate("/");
   }
 
-  const backButton = hasBackButton ? <img src={backIcon} alt='back' onClick={logoutFunc} className='back-button'></img> : <></>
-
-  const backButtonComp = (
-    <div className='header-logo'>
-      {backButton}
-      {/* <img src={codesLogo} alt="codes logo" className='codes-logo'/> */}
-    </div>
+  const backButton = hasBackButton ? (
+    <img
+      src={backIcon}
+      alt="back"
+      onClick={logoutFunc}
+      className="back-button"
+    ></img>
+  ) : (
+    <></>
   );
 
-  const headerStyle = hasBackButton ? {justifyContent: 'space-between'} : {justifyContent: 'space-around'}
+  const backButtonComp = <div className="w-8 h-8">{backButton}</div>;
 
-  return(
-    <div className='header' style={headerStyle}>
-      {hasBackButton ? backButtonComp : null}
-
-      <div style={{display: 'flex'}}>
-        {/* <img src={codesLogo} alt="codes logo" className='codes-logo'/> */}
-        <h1 className='header-title'>CheckGa! CHECKER</h1>
-      </div>
-
-
-      <div>
-        <img src={codesLogo} alt="info" className='codes-logo'/>
+  return (
+    <div className="border-b border-b-[#1d1d1d]">
+      <div className="container flex items-center gap-4 py-4 mx-auto ">
+        {hasBackButton ? backButtonComp : null}
+        <img className="w-10 aspect-auto" src={codesLogo} alt="info" />
+        <h1 className="text-lg font-bold">CheckGa! Checker</h1>
       </div>
     </div>
-  )
+  );
 }
 
 function App() {
-
   const [student, setStudent] = useState(null);
 
-  function clearStudent(){
+  function clearStudent() {
     setStudent(null);
   }
 
   return (
     <>
-    <StudentContext.Provider value = {[student, setStudent]}>
-      <Router>
-        <Routes>
-          <Route exact path='/' element={<Header/>}/>
-          <Route exact path='/event/:id' element={<Header backButtonRoute={'/'} clearStudent={clearStudent}/>}/>
-        </Routes>
-        <div className='content-div'>
-          <Routes>
-            <Route exact path='/' element={<LoginPage/>}/>
-            <Route exact path='/event/:id' element={<EventPage/>}/>
-          </Routes>
-        </div>
-      </Router>
-    </StudentContext.Provider>
+      <div className="text-white bg-[#080808] h-screen flex flex-col">
+        <StudentContext.Provider value={[student, setStudent]}>
+          <Router>
+            <Routes>
+              <Route exact path="/" element={<Header />} />
+              <Route
+                exact
+                path="/event/:id"
+                element={
+                  <Header backButtonRoute={"/"} clearStudent={clearStudent} />
+                }
+              />
+            </Routes>
+            <Routes>
+              <Route exact path="/" element={<LoginPage />} />
+              <Route exact path="/event/:id" element={<EventPage />} />
+            </Routes>
+          </Router>
+        </StudentContext.Provider>
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

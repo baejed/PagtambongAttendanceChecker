@@ -29,7 +29,8 @@
   border-color: #5d5d5d;
   background-color: #0000;
   border-width: 1px;
-  box-shadow: 0 4px 8px 0 rgba(162, 162, 162, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(162, 162, 162, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .codes-logo {
@@ -40,14 +41,14 @@
 
 .codes-logo:hover {
   cursor: pointer;
-  filter: drop-shadow(0 0 0.25rem #0299E3);
+  filter: drop-shadow(0 0 0.25rem #0299e3);
   transform: scale(1.1);
 }
 
 .header-title {
   font-size: 2rem;
   margin: 0;
-  background-image: linear-gradient(to right, #fff, #0299E3);
+  background-image: linear-gradient(to right, #fff, #0299e3);
   color: transparent;
   background-clip: text;
 }
@@ -66,7 +67,8 @@
 
 .back-button:hover {
   cursor: pointer;
-  filter: invert(52%) sepia(58%) saturate(1152%) hue-rotate(178deg) brightness(91%) contrast(87%);
+  filter: invert(52%) sepia(58%) saturate(1152%) hue-rotate(178deg)
+    brightness(91%) contrast(87%);
   transform: scale(1.1);
 }
 

@@ -33,7 +33,9 @@ function Header({ backButtonRoute, clearStudent }) {
     <></>
   );
 
-  const backButtonComp = <div className="w-8 h-8">{backButton}</div>;
+  const backButtonComp = (
+    <div className="w-8 h-8 cursor-pointer">{backButton}</div>
+  );
 
   return (
     <div className="border-b border-b-[#1d1d1d]">

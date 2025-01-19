@@ -189,11 +189,11 @@ function EventPage() {
             </div>
           </div>
         </div>
-        <div className="grid grid-rows-[1fr_3fr]">
+        <div className="grid grid-rows-[1fr_3fr] aspect-square">
           <div className="text-center bg-black rounded-t-lg ">
             <p className="schedule-month">{month}</p>
           </div>
-          <div className="bg-[#146ef5] text-center rounded-b-lg text-5xl font-bold grid place-items-center ">
+          <div className="bg-[#146ef5] text-center text-3xl rounded-b-lg sm:text-5xl font-bold grid place-items-center ">
             <h1 className="schedule-day">{day}</h1>
           </div>
         </div>
@@ -205,7 +205,7 @@ function EventPage() {
     <div>
       <div></div>
       <div className="container flex flex-col mx-auto">
-        <h1 className="my-8 text-5xl font-bold text-center">
+        <h1 className="my-8 text-4xl font-bold text-center sm:text-5xl">
           {loggedStudentText}
         </h1>
         <div
